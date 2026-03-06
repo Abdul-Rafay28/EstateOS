@@ -1,0 +1,36 @@
+import { Route, Routes } from "react-router-dom"
+import SignUp from "./pages/SignUp"
+import Login from "./pages/Login"
+import GetTenants from "./pages/getTenants"
+import AddProperty from "./pages/AddProperty"
+import TenantLayout from "./pages/TenantLayout"
+import AddMember from "./pages/AddMember"
+import AddContact from "./pages/AddContact"
+import GetProperties from "./pages/GetProperties"
+import GetMembers from "./pages/GetMembers"
+import GetContacts from "./pages/GetContacts"
+
+
+function Routers() {
+    return (
+        <>
+            <Routes>
+                <Route path="/signUp" element={<SignUp />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/tenants" element={<GetTenants />} />
+
+                <Route path="/tenant/:tenantId" element={<TenantLayout />}>
+                    <Route path="properties/new" element={<AddProperty />} />
+                    <Route path="members/new" element={<AddMember />} />
+                    <Route path="contacts/new" element={<AddContact />} />
+                    <Route path="properties" element={<GetProperties />} />
+                    <Route path="members" element={<GetMembers />} />
+                    <Route path="contacts" element={<GetContacts />} />
+                </Route>
+
+            </Routes>
+        </>
+    )
+}
+
+export default Routers; 

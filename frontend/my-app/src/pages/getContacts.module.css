@@ -1,0 +1,37 @@
+.getContactWrapper {
+    width: 100%;
+}
+
+.getContactWrapper h1 {
+    font-weight: bold;
+    font-size: 32px;
+    text-align: center;
+    color: white;
+}
+
+.getContactContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    align-items: flex-start;
+    margin-left: 25rem;
+    margin-top: 120px;
+    gap: 40px;
+    
+}
+
+.contactCard {
+    background-color: darkgray;
+    width: 300px;
+    border-radius: 10px;
+    border: 4px solid darkcyan;
+    height: 150px;
+}
+
+.contactCard span {
+    font-weight: bold;
+}
+
+.contactCard li {
+    font-size: 19px;
+    padding: 5px;
+}

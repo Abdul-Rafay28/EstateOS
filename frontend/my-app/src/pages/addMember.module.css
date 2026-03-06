@@ -1,0 +1,94 @@
+.addMemberWrapper {
+   background: #0b1220;
+   height: 100vh;
+   width: 100%;
+   color: white;
+   display: flex;
+   flex-direction: column;
+   justify-content: flex-start;
+   align-items: center;
+   padding-top: 80px;
+}
+
+.addMemberWrapper h1 {
+    margin: 0;
+}
+
+.addMemberContainer {
+    width: 400px;
+    background-color: darkgray;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 190px;
+}
+
+.addMemberContainer h2 {
+    font-size: 28px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.addMemberContainer form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.addMemberContainer label {
+    font-size: 22px;
+    font-weight: 500;
+    margin-top: 20px;
+}
+
+.addMemberContainer input {
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 6px;
+}
+
+
+
+.addMemberContainer select {
+    height: 40px;
+    border: 1px solid black;
+    border-radius: 6px;
+}
+
+
+
+.error {
+   background: rgba(255, 60, 60, 0.08);
+    color: rgba(229, 7, 7, 0.95);
+    text-align: center;
+    margin-top: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 60, 60, 0.25);
+    font-size: 20px;
+}
+
+.message {
+    background: rgb(170, 233, 170);
+    color: rgba(3, 103, 16, 0.95);
+    text-align: center;
+    margin: 20px auto;
+    border-radius: 10px;
+    border: 1px solid rgba(5, 115, 7, 0.25);
+    font-size: 20px;
+    width: 240px;
+}
+
+
+.addMemberContainer button {
+    width: 200px;
+    height: 35px;
+    border-radius: 10px;
+    margin: 20px auto;
+    transition: all 0.3s ease;
+    font-size: 18px;
+}
+
+.addMemberContainer button:hover {
+    transform: translateY(-1px);
+    background-color: #0b1220;
+    color: white;
+}

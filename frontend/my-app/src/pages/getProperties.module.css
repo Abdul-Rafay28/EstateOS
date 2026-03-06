@@ -1,0 +1,45 @@
+.getPropertiesWrapper {
+    width: 100%;
+}
+
+.getPropertiesContainer {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start;
+    margin-left: 18rem;
+    margin-top: 50px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.getPropertiesCard {
+    background-color: darkgray;
+    width: 400px;
+    margin-top: 20px;
+    border-radius: 10px;
+    border: 4px solid darkcyan;
+    box-shadow: 20px 0 280px rgba(0, 0, 0, 0.1);
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+}
+
+.getPropertiesCard  li{
+    font-weight: 500;
+    font-style: 14px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin-bottom: 10px;
+}
+
+.getPropertiesCard span {
+    font-weight: bold;
+    font-size: 18px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.getPropertiesCard:hover {
+    transform: translateY(-4px);
+    border-color: rgba(10, 74, 84, 0.5);
+}

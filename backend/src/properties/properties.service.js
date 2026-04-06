@@ -1,4 +1,3 @@
-import { response } from "express";
 import contactModel from "../contacts/contact.model.js";
 import propertyModel from "./properties.model.js";
 
@@ -17,7 +16,7 @@ export const addPropertyService = async ({ title, address, listingType, price, d
 }
 
 export const getPropertyService = async ({ tenantId }) => {
-    const getPropertyFind = await propertyModel.find({ tenantId, status: 'ACTIVE' }).select('title address listingType price').populate('ownerContactId', 'fullName').sort({ createdAt: -1 })
+    const getPropertyFind = await propertyModel.find({ tenantId }).select('title address listingType price status').populate('ownerContactId', 'fullName').sort({ createdAt: -1 })
 
     return getPropertyFind;
 }
@@ -40,10 +39,10 @@ export const updatePropertyService = async ({ propertyId, tenantId }) => {
         throw error;
     }
 
-    if (property.status === "ACTIVE") {
-        property.status = "ARCHIVED"
-    } else if (property.status === "ARCHIVED"){
-        property.status = "ACTIVE"
+    if (property.status === "AVAILABLE") {
+        property.status = "SOLD"
+    } else {
+        property.status = "AVAILABLE"
     }
 
     await property.save();

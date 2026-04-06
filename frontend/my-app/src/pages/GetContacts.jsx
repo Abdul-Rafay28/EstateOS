@@ -1,11 +1,12 @@
 import styles from './getContacts.module.css';
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 function GetContacts() {
 
     const [data, setData] = useState([]);
     const [err, setErr] = useState('')
+    const navigate = useNavigate();
 
     useEffect(() => {
         getContactsData();
@@ -34,7 +35,11 @@ function GetContacts() {
             <div className={styles.getContactWrapper}>
                 <h1>Contact Data For Property Owner</h1>
                 {
-                    err && <h1>{err}</h1>
+                    err ?
+                        <div className={styles.errorWrapper}>
+                            {err && <h3 className={styles.error}>🔒{err}</h3>}
+                            {err ? <button className={styles.goLoginBtn} onClick={() => navigate('/login')}>Go to login</button> : null}
+                        </div> : null
                 }
                 <div className={styles.getContactContainer}>
 

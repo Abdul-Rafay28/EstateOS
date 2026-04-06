@@ -9,20 +9,19 @@ export const addProperty = async (req, resp) => {
                 success: false,
             })
         }
-
         if (listingType !== "RENT" && listingType !== "SALE") {
             return resp.status(400).json({
                 message: 'Corrent your listing type',
                 success: false,
             })
         }
-
         const tenantId = req.tenant._id;
         const userId = req.userId;
 
         const propertyData = await addPropertyService({ title, address, listingType, price, description, tenantId, createdBy: userId, ownerContactId });
 
         return resp.status(201).json({
+            message: 'Add Property Successfull',
             data: propertyData,
             success: true,
         })
@@ -30,6 +29,21 @@ export const addProperty = async (req, resp) => {
     } catch (err) {
         resp.status(500 || err.statusCode).json({
             message: err.message || 'Internal server error',
+            success: false,
+        })
+    }
+}
+
+export const authCheck = async (req, resp) => {
+    try {
+        return resp.status(200).json({
+            message: 'Welcome User!',
+            success: true,
+        })
+
+    } catch (err) {
+        resp.status(500).json({
+            message: 'Internal server error',
             success: false,
         })
     }
@@ -79,10 +93,11 @@ export const updateProperty = async (req, resp) => {
     try {
         const tenantId = req.tenant._id;
         const propertyId = req.params.id;
-        const property = await updatePropertyService({ propertyId , tenantId});
+        const property = await updatePropertyService({ propertyId, tenantId });
 
         return resp.status(200).json({
             success: true,
+            data: property,
         })
 
 
@@ -93,3 +108,4 @@ export const updateProperty = async (req, resp) => {
         })
     }
 }
+

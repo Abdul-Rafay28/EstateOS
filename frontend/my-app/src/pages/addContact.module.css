@@ -17,12 +17,50 @@
 
 }
 
+.errorWrapper {
+    margin: 20px auto;
+    width: 300px;
+    padding: 20px;
+    background: #5a1f1f;
+    color: #fff;
+    border: 1px solid #ff4d4d;
+    border-radius: 10px;
+}
+
+.goLoginBtn {
+    display: block;
+    margin: 20px auto;
+    background-color: darkcyan;
+    padding: 5px 10px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.goLoginBtn:hover {
+    background-color: #159a9a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+
+}
+
+
 .addContactContaier {
-    background-color: darkgray;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     width: 400px;
     padding: 20px;
-    border-radius: 10px;
     box-shadow: 20px 0 280px rgba(0, 0, 0, 0.1);
+}
+
+.addContactContaier h2 {
+    color: #a9baf8;
+    font-size: 28px;
+    text-align: center;
 }
 
 .addContactContaier form {
@@ -35,6 +73,7 @@
     font-size: 22px;
     margin-top: 10px;
     font-weight: 500;
+    color: #a9baf8;
 }
 
 .addContactContaier input {
@@ -76,4 +115,11 @@
     margin: 20px auto;
     height: 30px;
     border-radius: 10px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.addContactContaier button:hover {
+    transform: translateY(-3px);
+    background-color: #a9baf8;
 }

@@ -42,6 +42,26 @@ export const getTenants = async (req, resp) => {
     }
 }
 
+export const logout = async (req, resp) => {
+    try {
+        resp.clearCookie('token', {
+            httpOnly: true,
+            secure: false,
+            sameSite: 'lax'
+        })
+        return resp.status(200).json({
+            message: 'You are successfully logout',
+            success: true,
+        })
+
+    } catch (err) {
+        resp.status(500).json({
+            message: 'Internal server error',
+            success: false,
+        })
+    }
+}
+
 
 export const currentTenant = async (req, resp) => {
     try {

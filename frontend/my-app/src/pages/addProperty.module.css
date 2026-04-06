@@ -3,8 +3,8 @@
     min-height: 100vh;
     width: 100%;
     display: flex;
-    justify-content: center;  
-    align-items: center;      
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
 }
 
@@ -16,16 +16,47 @@
     font-size: 28px;
 }
 
+.errorWrapper {
+    margin: 20px auto;
+    width: 300px;
+    padding: 20px;
+    background: #5a1f1f;
+    color: #fff;
+    border: 1px solid #ff4d4d;
+    border-radius: 10px;
+}
+
+.goLoginBtn {
+    display: block;
+    margin: 20px auto;
+    background-color: darkcyan;
+    padding: 5px 10px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.goLoginBtn:hover {
+    background-color: #159a9a;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+
+}
+
 .addPropertyContainer {
     width: 400px;
-    background-color: darkgray;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
     padding: 20px;
-    border-radius: 8px;
     box-shadow: 40px 0 280px rgba(0, 0, 0, 0.1);
 }
 
 .error {
-   background: rgba(255, 60, 60, 0.08);
+    background: rgba(255, 60, 60, 0.08);
     color: rgba(229, 7, 7, 0.95);
     text-align: center;
     margin-top: 10px;
@@ -49,6 +80,7 @@
 .addPropertyContainer h3 {
     font-size: 28px;
     font-weight: bold;
+    color: #8fa8ff;
 }
 
 
@@ -61,17 +93,18 @@
     font-size: 20px;
     font-weight: 500;
     margin-top: 10px;
+    color: #a9baf8;
 }
 
 .addPropertyContainer input {
-   width: 370px;
-   height: 30px;
-   font-size: 16px;
-   border: 2px solid black;
-   border-radius: 7px;
+    width: 370px;
+    height: 30px;
+    font-size: 16px;
+    border: 2px solid black;
+    border-radius: 7px;
 }
 
-.addPropertyContainer select{
+.addPropertyContainer select {
     border-radius: 7px;
     width: 380px;
     height: 35px;
@@ -96,5 +129,32 @@
 }
 
 .addPropertyContainer button:hover {
-    background-color: darkcyan;
+    background-color: #8fa8ff;
+}
+
+.dropdown {
+    background: white;
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.option {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.option:hover {
+    background: #eee;
+}
+
+.selected {
+    color: green;
+    margin-top: 10px;
+}
+
+
+.searchItem {
+    padding: 8px;
+    cursor: pointer;
 }

@@ -40,6 +40,7 @@ function GetTenants() {
             <div className={styles.getTenantsWrapper}>
                 <h1>Select Workspace</h1>
                 <h5>Choose a tenant to continue</h5>
+                <span className={styles.workspaceBtn}><button onClick={() => navigate('/addTenantWorkspace')}>Create WorkSpace</button></span>
                 {
                     err ?
                         <div className={styles.errorWrapper}>
@@ -50,7 +51,9 @@ function GetTenants() {
                 <div className={styles.getTenantsContainer}>
                     {
                         data.map((d) => (
-                            <div onClick={()=>navigate(`/tenant/${d._id}`)} className={styles.getTenantsSection} key={d._id}>
+                            <div onClick={() => navigate(`/tenant/${d._id}`, {
+                                state: { name: d.name }
+                            })} className={styles.getTenantsSection} key={d._id}>
                                 <h3><span>Tenant Name:</span>{d.name}</h3>
                                 <h3><span>Country:  </span> {d.country}</h3>
                                 <h3><span>Status: </span>{d.status}</h3>

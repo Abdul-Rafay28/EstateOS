@@ -9,6 +9,8 @@ import AddContact from "./pages/AddContact"
 import GetProperties from "./pages/GetProperties"
 import GetMembers from "./pages/GetMembers"
 import GetContacts from "./pages/GetContacts"
+import AddTenants from "./pages/AddTenant"
+import Dashboard from "./pages/Dashboard"
 
 
 function Routers() {
@@ -18,14 +20,18 @@ function Routers() {
                 <Route path="/signUp" element={<SignUp />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/tenants" element={<GetTenants />} />
+                <Route path="/addTenantWorkspace" element={<AddTenants />} />
 
                 <Route path="/tenant/:tenantId" element={<TenantLayout />}>
+                    <Route path="dashboard/stats" element={<Dashboard />} />
                     <Route path="properties/new" element={<AddProperty />} />
-                    <Route path="members/new" element={<AddMember />} />
                     <Route path="contacts/new" element={<AddContact />} />
                     <Route path="properties" element={<GetProperties />} />
+                    <Route path="members/new" element={<AddMember />} />
                     <Route path="members" element={<GetMembers />} />
+                    <Route path="edit/member/:id" element={<AddMember />} />
                     <Route path="contacts" element={<GetContacts />} />
+
                 </Route>
 
             </Routes>

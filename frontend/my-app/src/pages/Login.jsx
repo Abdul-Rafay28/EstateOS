@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './login.module.css';
 import { useState } from "react"
 
@@ -46,6 +46,7 @@ function Login() {
                         <input autoComplete='new-password' type="password" onChange={(e) =>{ setPassword(e.target.value); setErr('')}} value={password} placeholder="Enter your password" />
                         {err && <span  className={styles.error}>{err}</span>}
                         <button disabled={loading} className={styles.loginBtn}>{loading ? "Loggin in..." : "Login"}</button>
+                        <span className={styles.accountCreate}><Link to={'/signUp'}>You don't have account?</Link></span>
                     </form>
                 </div>
             </div>

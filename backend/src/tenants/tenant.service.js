@@ -1,11 +1,15 @@
-import memberShipModel from "../memberships/membership.model.js";
+import memberShipModel from "../memberships/memberShip.model.js";
 import { createMember } from "../memberships/membership.service.js";
+import userModel from "../modules/user/user.model.js";
 import tenantModel from "./tenant.model.js"
 
 
 export const tenantService = async ({ name, country, userId }) => {
     const tenant = await tenantModel.create({ name, country, createdBy: userId, });
-    await createMember({ userId, tenantId: tenant._id, role: 'OWNER' });
+
+    const user = await userModel.findById(userId);
+
+    await createMember({ userId, tenantId: tenant._id, role: 'OWNER', email: user.email });
     return tenant;
 }
 

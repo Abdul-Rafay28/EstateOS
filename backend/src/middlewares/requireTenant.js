@@ -1,4 +1,4 @@
-import memberShipModel from "../memberships/membership.model.js";
+import memberShipModel from "../memberships/memberShip.model.js";
 import tenantModel from "../tenants/tenant.model.js";
 
 export const requireTenant = async (req, resp, next) => {

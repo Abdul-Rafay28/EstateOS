@@ -39,6 +39,6 @@ const memberShipSchema = mongoose.Schema({
 
 memberShipSchema.index({ tenantId: 1, userId: 1 }, { unique: true, })
 
-const memberShipModel = mongoose.model('membership', memberShipSchema);
+const memberShipModel = mongoose.models.membership || mongoose.model("membership", memberShipSchema);
 
 export default memberShipModel;

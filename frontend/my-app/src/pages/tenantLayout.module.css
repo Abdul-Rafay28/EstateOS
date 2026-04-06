@@ -1,7 +1,8 @@
 .tenantWrapper {
     background-color: #0b1220;
-    height: 100vh;
     width: 100%;
+    min-height: 100vh;
+
 }
 
 .tenantHeading {
@@ -18,6 +19,29 @@
     top: 10px;
     font-weight: bold;
     font-size: 28px;
+}
+
+.logoutBtn {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    right: 40px;
+    bottom: 20px;
+
+}
+
+.logoutBtn button {
+    width: 80px;
+    height: 30px;
+    font-size: 17px;
+    font-weight: bold;
+    border-radius: 10px;
+    border: 2px solid black;
+    background-color: darkcyan;
+}
+
+.logoutBtn button:hover {
+    background-color: red;
 }
 
 .tenantLeftMenu {

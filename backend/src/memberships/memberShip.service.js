@@ -99,10 +99,7 @@ export const singleMemberService = async ({ tenantId, memberId }) => {
         throw error;
     }
 
-    const email = singleMember.email;
-    const role = singleMember.role
-
-    return { email, role }
+    return singleMember
 
 
 }

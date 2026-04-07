@@ -8,8 +8,8 @@ function GetProperties() {
     const [data, setData] = useState([])
     const [err, setErr] = useState("")
     const navigate = useNavigate();
-    const [statusFilter, setStatusFilter]=useState('ALL');
-    const [search, setSearch]=useState('')
+    const [statusFilter, setStatusFilter] = useState('ALL');
+    const [search, setSearch] = useState('')
 
     useEffect(() => {
         getProperties()
@@ -33,14 +33,14 @@ function GetProperties() {
     }
 
     let filteredData = data;
-    if(statusFilter === 'AVAILABLE'){
-        filteredData = data.filter((d)=> d.status === 'AVAILABLE')
-    }else if(statusFilter === 'SOLD'){
-        filteredData = data.filter((d)=>d.status === 'SOLD')
+    if (statusFilter === 'AVAILABLE') {
+        filteredData = data.filter((d) => d.status === 'AVAILABLE')
+    } else if (statusFilter === 'SOLD') {
+        filteredData = data.filter((d) => d.status === 'SOLD')
     }
 
     const updateProperty = async (id) => {
-        const url = "http://localhost:3200/api/v1/property/" + id;
+        const url = "http://localhost:3200/api/v1/propertyStatus/" + id;
         const updateRes = await fetch(url, {
             method: 'PATCH',
             credentials: 'include',
@@ -51,28 +51,32 @@ function GetProperties() {
         const res = await updateRes.json();
         if (!res.success) {
             alert(res.message)
-        }else{
+        } else {
             getProperties();
         }
     }
 
-    if(search){
-        filteredData = filteredData.filter((d)=>
+    if (search) {
+        filteredData = filteredData.filter((d) =>
             d.title.toLowerCase().includes(search.toLocaleLowerCase()) ||
             d.address.toLowerCase().includes(search.toLocaleLowerCase()) ||
             d.listingType.toLowerCase().includes(search.toLocaleLowerCase())
         );
     }
 
+    function editProperty(id) {
+        navigate(`/tenant/${tenantId}/edit/properties/${id}`)
+    }
+
     return (
         <>
             <div className={styles.getPropertiesWrapper}>
                 <div className={styles.propertiesBtn}>
-                    <button onClick={()=>setStatusFilter('ALL')}>All</button>
-                    <button onClick={()=>setStatusFilter('AVAILABLE')}>Available</button>
-                    <button onClick={()=>setStatusFilter('SOLD')}>Sold</button>
+                    <button onClick={() => setStatusFilter('ALL')}>All</button>
+                    <button onClick={() => setStatusFilter('AVAILABLE')}>Available</button>
+                    <button onClick={() => setStatusFilter('SOLD')}>Sold</button>
 
-                    <input onChange={(e)=>setSearch(e.target.value)} value={search} type="text" placeholder='Search Bar' />
+                    <input onChange={(e) => setSearch(e.target.value)} value={search} type="text" placeholder='Search Bar' />
                 </div>
                 {
                     err ?
@@ -93,10 +97,10 @@ function GetProperties() {
                                     <li><span>Price : </span> {d.price}</li>
                                     <li><span>Owner : </span>{d.ownerContactId?.fullName}</li>
                                     <li><span>Status : </span>{d.status}</li>
-                                    {
-                                        d.status === "AVAILABLE"  ? <li><button onClick={() => updateProperty(d._id)}>Mark as Sold</button></li>: null
-                                    }
-                                    
+
+                                    <button onClick={() => updateProperty(d._id)}>Mark as Sold</button> 
+                                    <button onClick={() => editProperty(d._id)}>Edit</button>
+
                                 </ul>
                             </div>
                         ))

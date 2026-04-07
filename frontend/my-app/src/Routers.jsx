@@ -27,6 +27,7 @@ function Routers() {
                     <Route path="properties/new" element={<AddProperty />} />
                     <Route path="contacts/new" element={<AddContact />} />
                     <Route path="properties" element={<GetProperties />} />
+                    <Route path="edit/properties/:id" element={<AddProperty />} />
                     <Route path="members/new" element={<AddMember />} />
                     <Route path="members" element={<GetMembers />} />
                     <Route path="edit/member/:id" element={<AddMember />} />

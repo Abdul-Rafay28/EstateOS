@@ -13,7 +13,7 @@ function AddProperty() {
     const [search, setSearch] = useState("");
     const [filteredOwners, setFilteredOwners] = useState([]);
 
-    const { tenantId } = useParams();
+    const { tenantId, id } = useParams();
 
     const [formData, setFormData] = useState({
         title: '',
@@ -35,35 +35,77 @@ function AddProperty() {
 
     }
 
-    const addProperty = async (e) => {
+    useEffect(() => {
+        getProperty();
+    }, [])
+
+    const getProperty = async () => {
+        const url = "http://localhost:3200/api/v1/get/singleProperty/" + id;
+        const getPropertyRes = await fetch(url, {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'x-tenant-id': tenantId,
+            },
+        });
+        const res = await getPropertyRes.json();
+        if (res.success) {
+            setFormData(res.data)
+            setSearch(res.data.ownerContactId?.fullName)
+        }
+    }
+
+    const handleSubmit = async (e) => {
         try {
             e.preventDefault();
             setLoading(true)
-            const { title, address, price, listingType, description, ownerContactId } = formData;
-            if (!title || !address || !price || !listingType || !description || !ownerContactId) {
-                setErr("All fields are required!")
-                setLoading(false)
-                return;
-            }
+            if (id) {
+                const url = "http://localhost:3200/api/v1/property/update/" + id;
+                const updateRes = await fetch(url, {
+                    method: 'PUT',
+                    credentials: 'include',
+                    headers: {
+                        'x-tenant-id': tenantId,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+                const res = await updateRes.json();
+                if (!res.success) {
+                    setErr(res.message)
+                    setLoading(false)
+                } else {
+                    setMess(res.message)
+                    setLoading(false)
+                }
 
-            const url = "http://localhost:3200/api/v1/addProperty";
-            const propertyRes = await fetch(url, {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    'x-tenant-id': tenantId,
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
-            })
-
-            const res = await propertyRes.json();
-            if (!res.success) {
-                setErr(res.message)
-                setLoading(false)
             } else {
-                setMess(res.message)
-                setLoading(false)
+                const { title, address, price, listingType, description, ownerContactId } = formData;
+                if (!title || !address || !price || !listingType || !description || !ownerContactId) {
+                    setErr("All fields are required!")
+                    setLoading(false)
+                    return;
+                }
+
+                const url = "http://localhost:3200/api/v1/addProperty";
+                const propertyRes = await fetch(url, {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                        'x-tenant-id': tenantId,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                })
+
+                const res = await propertyRes.json();
+                if (!res.success) {
+                    setErr(res.message)
+                    setLoading(false)
+                } else {
+                    setMess(res.message)
+                    setLoading(false)
+                }
             }
 
         } catch (err) {
@@ -143,7 +185,7 @@ function AddProperty() {
                         </div> :
                         <div className={styles.addPropertyContainer}>
                             <h3>Add Property Form</h3>
-                            <form onSubmit={addProperty}>
+                            <form onSubmit={handleSubmit}>
                                 <label>Title</label>
                                 <input type="text" name="title" onChange={handleChange} value={formData.title} placeholder="e.g., Luxury 3 Bed Apartment in DHA" />
 

@@ -1,4 +1,4 @@
-import { addPropertyService, getPropertyService, propertyByIdService, updatePropertyService } from "./properties.service.js";
+import { addPropertyService, getPropertyService, getSinglePropertyService, propertyByIdService, updatePropertyStatusService, updateSinglePropertyService } from "./properties.service.js";
 
 export const addProperty = async (req, resp) => {
     try {
@@ -89,11 +89,11 @@ export const getPropertyById = async (req, resp) => {
 }
 
 
-export const updateProperty = async (req, resp) => {
+export const updatePropertyStatus = async (req, resp) => {
     try {
         const tenantId = req.tenant._id;
         const propertyId = req.params.id;
-        const property = await updatePropertyService({ propertyId, tenantId });
+        const property = await updatePropertyStatusService({ propertyId, tenantId });
 
         return resp.status(200).json({
             success: true,
@@ -109,3 +109,46 @@ export const updateProperty = async (req, resp) => {
     }
 }
 
+export const getSingleProperty = async (req, resp) => {
+    try {
+        const propertyId = req.params.id;
+        const tenantId = req.tenant._id;
+
+        const singleData = await getSinglePropertyService({ propertyId, tenantId });
+
+        resp.status(200).json({
+            data: singleData,
+            success: true,
+        })
+
+    } catch (err) {
+        resp.status(err.statusCode || 500).json({
+            message: err.message || 'Internal server error',
+            success: false,
+
+        })
+    }
+}
+
+
+export const updateSingleProperty = async (req, resp) => {
+    try {
+        const propertyId = req.params.id;
+        const tenantId = req.tenant._id;
+        const propertyData = req.body;
+        const updateData = await updateSinglePropertyService({ propertyId, tenantId, propertyData });
+
+        resp.status(200).json({
+            message: 'Property Updated successfully',
+            updateData: updateData,
+            success: true,
+        })
+
+
+    } catch (err) {
+        resp.status(err.statusCode || 500).json({
+            message: err.message || 'Internal server error',
+            success: false,
+        })
+    }
+}

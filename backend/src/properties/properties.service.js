@@ -31,7 +31,7 @@ export const propertyByIdService = async ({ tenantId, propertyId }) => {
     return property;
 }
 
-export const updatePropertyService = async ({ propertyId, tenantId }) => {
+export const updatePropertyStatusService = async ({ propertyId, tenantId }) => {
     const property = await propertyModel.findOne({ _id: propertyId, tenantId })
     if (!property) {
         const error = new Error('Property not found');
@@ -41,12 +41,38 @@ export const updatePropertyService = async ({ propertyId, tenantId }) => {
 
     if (property.status === "AVAILABLE") {
         property.status = "SOLD"
-    } else {
+    } else  {
         property.status = "AVAILABLE"
     }
 
     await property.save();
 
     return property;
+
+}
+
+export const getSinglePropertyService = async ({ propertyId, tenantId }) => {
+    const singleProperty = await propertyModel.findOne({ _id: propertyId, tenantId }).populate('ownerContactId', 'fullName phone')
+    if (!singleProperty) {
+        const error = new Error('Property not found');
+        error.statusCode = 404;
+        throw error;
+    }
+
+    return singleProperty;
+
+
+}
+
+export const updateSinglePropertyService = async ({ propertyId, tenantId, propertyData }) => {
+    const updateProperty = await propertyModel.findOneAndUpdate({ _id: propertyId, tenantId }, { $set: propertyData }, { new: true });
+    if (!updateProperty) {
+        const error = new Error('Property not found!');
+        error.statusCode = 404;
+        throw error;
+    }
+
+
+    return updateProperty;
 
 }

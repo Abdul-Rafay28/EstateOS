@@ -58,6 +58,20 @@
     color: white;
 }
 
+.getPropertiesCard button {
+    font-size: 18px;
+    font-weight: 500;
+    border: none;
+    margin-top: 10px;
+    margin-left: 20px;
+    background-color: #159a9a;
+    border-radius: 10px;
+}
+
+.getPropertiesCard button:hover {
+    background-color: #a0bfff;
+}
+
 .error {
     color: red;
     text-align: center;

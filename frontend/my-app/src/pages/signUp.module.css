@@ -76,8 +76,9 @@
     cursor: pointer;
     border: 4px solid darkcyan;
     font-weight: bold;
-    color: darkcyan;
+    color: black;
     border-radius: 10px;
+    background-color: darkcyan;
 }
 
 .SignContainer form .SignUpBtn:hover {

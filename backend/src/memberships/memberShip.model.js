@@ -22,7 +22,7 @@ const memberShipSchema = mongoose.Schema({
         default: 'OWNER',
     },
 
-    email:{
+    email:{   
         type: String, 
         unique: true,
         required: true,

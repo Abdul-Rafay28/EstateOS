@@ -1,15 +1,18 @@
 import styles from './getProperties.module.css';
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 function GetProperties() {
 
     const { tenantId } = useParams()
     const [data, setData] = useState([])
-    const [err, setErr] = useState("")
+    const [err, setErr] = useState(null)
     const navigate = useNavigate();
     const [statusFilter, setStatusFilter] = useState('ALL');
     const [search, setSearch] = useState('')
+
+    const location = useLocation();
+    const name = location.state?.name;
 
     useEffect(() => {
         getProperties()
@@ -28,7 +31,7 @@ function GetProperties() {
         if (res.success) {
             setData(res.propertyData)
         } else {
-            setErr(res.message)
+            setErr(res)
         }
     }
 
@@ -50,7 +53,7 @@ function GetProperties() {
         })
         const res = await updateRes.json();
         if (!res.success) {
-            alert(res.message)
+            setErr(res)
         } else {
             getProperties();
         }
@@ -68,6 +71,29 @@ function GetProperties() {
         navigate(`/tenant/${tenantId}/edit/properties/${id}`)
     }
 
+    const deleteProperty = async (id) => {
+        const url = "http://localhost:3200/api/v1/property/delete/" + id;
+        const deleteRes = await fetch(url, {
+            method: 'DELETE',
+            credentials: 'include',
+            headers: {
+                'x-tenant-id': tenantId,
+            },
+
+        })
+        const res = await deleteRes.json();
+        if (!res.success) {
+            setErr(res)
+        } else {
+            getProperties();
+        }
+    }
+
+
+    function viewProperty(id) {
+        navigate(`/tenant/${tenantId}/viewProperty/${id}`, { state: { name } })
+    }
+
     return (
         <>
             <div className={styles.getPropertiesWrapper}>
@@ -81,8 +107,10 @@ function GetProperties() {
                 {
                     err ?
                         <div className={styles.errorWrapper}>
-                            {err && <h3 className={styles.error}>🔒{err}</h3>}
-                            {err ? <button className={styles.goLoginBtn} onClick={() => navigate('/login')}>Go to login</button> : null}
+                            {err.message && <h3 className={styles.error}>🔒{err.message}</h3>}
+                            {err.type === 'Subscription_Required' || err.type === 'Subscription_Expired' ?
+                                <button onClick={() => navigate(`/tenant/${tenantId}/subscription/menu`, {state: { name }})} className={styles.btn}>Upgrade Plan</button> :
+                                <button className={styles.btn} onClick={() => navigate('/login')}>Go to login</button>}
                         </div> : null
                 }
                 <div className={styles.getPropertiesContainer}>
@@ -97,9 +125,14 @@ function GetProperties() {
                                     <li><span>Price : </span> {d.price}</li>
                                     <li><span>Owner : </span>{d.ownerContactId?.fullName}</li>
                                     <li><span>Status : </span>{d.status}</li>
-
-                                    <button onClick={() => updateProperty(d._id)}>Mark as Sold</button> 
+                                    <li><span>CreatedBy : </span>{d.createdBy?.name}</li>
+                                    {
+                                        d.status === 'AVAILABLE' ?
+                                            <button className={styles.soldBtn} onClick={() => updateProperty(d._id)}>Mark as Sold</button> : null
+                                    }
                                     <button onClick={() => editProperty(d._id)}>Edit</button>
+                                    <button className={styles.deleteBtn} onClick={() => deleteProperty(d._id)}>Delete</button>
+                                    <button onClick={() => viewProperty(d._id)}>View</button>
 
                                 </ul>
                             </div>

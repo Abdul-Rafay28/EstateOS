@@ -3,7 +3,7 @@ import contactModel from "./contact.model.js"
 
 export const contactService = async ({ fullName, email, phone, tenantId }) => {
 
-    const emailFind = await userModel.findOne({ email });
+    const emailFind = await userModel.findOne({ email, tenantId });
     if (emailFind) {
         const error = new Error('this contact already exist')
         error.statusCode = 403;

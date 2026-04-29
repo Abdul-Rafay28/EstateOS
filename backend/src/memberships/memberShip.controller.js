@@ -70,7 +70,7 @@ export const getMembers = async (req, resp) => {
 
     } catch (err) {
         resp.status(500).json({
-            message: 'Internal server error',
+            message: err.message,
             success: false,
         })
     }

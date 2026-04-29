@@ -27,7 +27,34 @@ const tenantSchema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user',
         required: true,
-    }
+    },
+
+        subscriptionStatus: {
+        type: String,
+        enum: ['active', 'inactive'],
+        default: 'inactive'
+    },
+
+
+    plan: {
+        type: String,
+        enum: ['BASIC', 'PRO', 'MAX'],
+        default: null,
+    },
+
+    billingCycle: {
+        type: String,
+        enum: ['monthly', 'yearly'],
+        default: null
+    },
+
+    expiresAt: {
+        type: Date,
+        default: null,
+
+    },
+    
+
 }, {
     timestamps: true,
 })

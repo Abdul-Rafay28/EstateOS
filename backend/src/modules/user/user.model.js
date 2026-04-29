@@ -12,23 +12,18 @@ const userSchema = mongoose.Schema({
         unique: true,
         lowercase: true,
     },
-    
+
     password: {
         type: String,
         required: true,
         select: false,
     },
 
-    role: {
-        type: String,
-        enum: ['OWNER', 'ACCOUNTANT', 'VIEWER'],
-        default: 'OWNER',
-    },
-
     isActive: {
         type: Boolean,
         default: true,
     },
+
 }, {
     timestamps: true,
 })

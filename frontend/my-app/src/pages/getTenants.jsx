@@ -7,7 +7,7 @@ function GetTenants() {
 
 
     const [data, setData] = useState([]);
-    const [err, setErr] = useState('');
+    const [err, setErr] = useState(null);
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -44,14 +44,17 @@ function GetTenants() {
                 {
                     err ?
                         <div className={styles.errorWrapper}>
-                            {err && <h3 className={styles.error}>🔒{err}</h3>}
-                            {err ? <button className={styles.goLoginBtn} onClick={() => navigate('/login')}>Go to login</button> : null}
+                            {err.message && <h3 className={styles.error}>🔒{err.message}</h3>}
+                            {
+                                err ?
+                                    <button onClick={()=>navigate('/login')} className={styles.btn}>Go to login</button>:null
+                            }
                         </div> : null
                 }
                 <div className={styles.getTenantsContainer}>
                     {
                         data.map((d) => (
-                            <div onClick={() => navigate(`/tenant/${d._id}`, {
+                            <div onClick={() => navigate(`/tenant/${d._id}/dashboard/stats`, {
                                 state: { name: d.name }
                             })} className={styles.getTenantsSection} key={d._id}>
                                 <h3><span>Tenant Name:</span>{d.name}</h3>

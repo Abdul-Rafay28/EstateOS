@@ -1,12 +1,15 @@
 import styles from './getContacts.module.css';
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 
 function GetContacts() {
 
     const [data, setData] = useState([]);
     const [err, setErr] = useState('')
     const navigate = useNavigate();
+
+    const location = useLocation();
+    const name = location.state?.name;
 
     useEffect(() => {
         getContactsData();
@@ -27,20 +30,21 @@ function GetContacts() {
         if (res.success) {
             setData(res.contacts)
         } else {
-            setErr(res.message)
+            setErr(res)
         }
     }
     return (
         <>
             <div className={styles.getContactWrapper}>
                 <h1>Contact Data For Property Owner</h1>
-                {
-                    err ?
-                        <div className={styles.errorWrapper}>
-                            {err && <h3 className={styles.error}>🔒{err}</h3>}
-                            {err ? <button className={styles.goLoginBtn} onClick={() => navigate('/login')}>Go to login</button> : null}
-                        </div> : null
-                }
+                {err ?
+                    <div className={styles.errorWrapper}>
+                        {err.message && <h3 className={styles.error}>🔒{err.message}</h3>}
+                        {err.type === 'Subscription_Required' || err.type === 'Subscription_Expired' ?
+                            <button onClick={() => navigate(`/tenant/${tenantId}/subscription/menu`, {state: { name }})}className={styles.btn}>Upgrade Plan</button> :
+                            <button className={styles.btn} onClick={() => navigate('/login')}>Go to login</button>}
+                    </div> : null}
+
                 <div className={styles.getContactContainer}>
 
                     {

@@ -1,4 +1,5 @@
 import contactModel from "../contacts/contact.model.js";
+import memberShipModel from "../memberships/memberShip.model.js";
 import propertyModel from "./properties.model.js";
 
 export const addPropertyService = async ({ title, address, listingType, price, description, tenantId, createdBy, ownerContactId }) => {
@@ -16,19 +17,36 @@ export const addPropertyService = async ({ title, address, listingType, price, d
 }
 
 export const getPropertyService = async ({ tenantId }) => {
-    const getPropertyFind = await propertyModel.find({ tenantId }).select('title address listingType price status').populate('ownerContactId', 'fullName').sort({ createdAt: -1 })
+    const getPropertyFind = await propertyModel.find({ tenantId, isDeleted: false }).select('title address listingType price status')
+        .populate('createdBy', 'name')
+        .populate('ownerContactId', 'fullName').sort({ createdAt: -1 })
 
     return getPropertyFind;
 }
 
 export const propertyByIdService = async ({ tenantId, propertyId }) => {
-    const property = await propertyModel.findOne({ _id: propertyId, tenantId }).populate('ownerContactId', 'fullName email phone')
+    const property = await propertyModel.findOne({ _id: propertyId, tenantId })
+        .populate('createdBy', 'name email')
+        .populate('ownerContactId', 'fullName email phone')
     if (!property) {
         const error = new Error("Property not found");
         error.statusCode = 404;
         throw error;
     }
-    return property;
+
+    const userId = property.createdBy._id;
+
+    const memberShipRole = await memberShipModel.findOne({ userId, tenantId })
+
+    if (!memberShipRole) {
+        const error = new Error('Membership not found for created user property');
+        error.statusCode = 404;
+        throw error;
+    }
+
+    const createdByRole = memberShipRole.role;
+
+    return { property, createdByRole }
 }
 
 export const updatePropertyStatusService = async ({ propertyId, tenantId }) => {
@@ -41,7 +59,7 @@ export const updatePropertyStatusService = async ({ propertyId, tenantId }) => {
 
     if (property.status === "AVAILABLE") {
         property.status = "SOLD"
-    } else  {
+    } else {
         property.status = "AVAILABLE"
     }
 
@@ -74,5 +92,31 @@ export const updateSinglePropertyService = async ({ propertyId, tenantId, proper
 
 
     return updateProperty;
+
+}
+
+
+export const deletePropertyService = async ({ propertyId, tenantId }) => {
+    const property = await propertyModel.findOneAndUpdate(
+        { _id: propertyId, tenantId },
+        {
+            $set: {
+                isDeleted: true,
+                deletedAt: new Date()
+            },
+
+        },
+        { new: true }
+
+
+    );
+    if (!property) {
+        const error = new Error('Property not found!');
+        error.statusCode = 404;
+        throw error;
+    }
+
+    return property;
+
 
 }

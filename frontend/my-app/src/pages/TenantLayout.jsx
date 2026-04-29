@@ -9,22 +9,23 @@ function TenantLayout() {
     const name = location.state?.name;
     const navigate = useNavigate();
 
-
     const logoutBtn = async (e) => {
         e.preventDefault();
         const url = "http://localhost:3200/api/v1/tenants/logout";
-        const logRes = await fetch(url, {
+        const logoutRes = await fetch(url, {
             method: 'POST',
             credentials: 'include',
-        })
-        const res = await logRes.json();
+        });
+        const res = await logoutRes.json();
         if (res.success) {
-            alert(res.message)
             navigate('/login')
         } else {
             alert(res.message)
         }
     }
+
+
+
     return (
         <>
             <div className={styles.tenantWrapper}>
@@ -41,7 +42,7 @@ function TenantLayout() {
                         <div className={styles.tenantLinks}>
                             <h3>Dashboard</h3>
                             <ul>
-                                <li><Link to={`/tenant/${tenantId}/dashboard/stats`} state={{name}}>View Dashboard</Link></li>
+                                <li><Link to={`/tenant/${tenantId}/dashboard/stats`} state={{ name }}>View Dashboard</Link></li>
                             </ul>
                         </div>
 
@@ -49,23 +50,23 @@ function TenantLayout() {
                             <h3>Properties</h3>
                             <ul>
                                 <li><Link to={`/tenant/${tenantId}/properties`} state={{ name }}>View Properties</Link></li>
-                                <li><Link to={`/tenant/${tenantId}/properties/new`} state={{name}} >Add Property</Link> </li>
+                                <li><Link to={`/tenant/${tenantId}/properties/new`} state={{ name }} >Add Property</Link> </li>
                             </ul>
                         </div>
 
                         <div className={styles.tenantLinks}>
                             <h3>Contacts</h3>
                             <ul>
-                                <li><Link to={`/tenant/${tenantId}/contacts`} state={{name}}>View Contact</Link></li>
-                                <li><Link to={`/tenant/${tenantId}/contacts/new`} state={{name}}>Add Contact</Link></li>
+                                <li><Link to={`/tenant/${tenantId}/contacts`} state={{ name }}>View Contact</Link></li>
+                                <li><Link to={`/tenant/${tenantId}/contacts/new`} state={{ name }}>Add Contact</Link></li>
                             </ul>
                         </div>
 
                         <div className={styles.tenantLinks}>
                             <h3>Members</h3>
                             <ul>
-                                <li><Link to={`/tenant/${tenantId}/members`} state={{name}}>View Member</Link></li>
-                                <li><Link to={`/tenant/${tenantId}/members/new`} state={{name}}>Add Member</Link></li>
+                                <li><Link to={`/tenant/${tenantId}/members`} state={{ name }}>View Member</Link></li>
+                                <li><Link to={`/tenant/${tenantId}/members/new`} state={{ name }}>Add Member</Link></li>
                             </ul>
                         </div>
 

@@ -42,7 +42,7 @@
     border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 20px 0 280px rgba(0, 0, 0, 0.1);
-    height: 240px;
+    height: 270px;
     display: flex;
     flex-direction: column;
     justify-self: center;
@@ -60,7 +60,7 @@
 
 .getPropertiesCard button {
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 600;
     border: none;
     margin-top: 10px;
     margin-left: 20px;
@@ -68,9 +68,25 @@
     border-radius: 10px;
 }
 
-.getPropertiesCard button:hover {
-    background-color: #a0bfff;
+.getPropertiesCard .soldBtn {
+    color: black;
+    font-weight: 600;
 }
+
+.getPropertiesCard .deleteBtn {
+    background-color: red;
+}
+
+.getPropertiesCard .deleteBtn:hover  {
+    background-color: darkred;
+}
+
+
+
+.getPropertiesCard .soldBtn:hover {
+    background-color: darkgreen;
+}
+
 
 .error {
     color: red;
@@ -89,7 +105,7 @@
     border-radius: 10px;
 }
 
-.goLoginBtn {
+.btn {
     display: block;
     margin: 20px auto;
     background-color: darkcyan;
@@ -102,7 +118,7 @@
     transition: all 0.2s ease;
 }
 
-.goLoginBtn:hover {
+.btn:hover {
     background-color: #159a9a;
     transform: translateY(-2px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);

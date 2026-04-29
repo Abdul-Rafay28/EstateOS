@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router';
 import styles from './signUp.module.css';
 import { useState } from "react";
 
@@ -9,6 +10,7 @@ function SignUp() {
     })
     const [err, setErr]=useState('')
     const [mess, setMess]=useState('')
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setErr('');
@@ -34,6 +36,7 @@ function SignUp() {
             setErr(res.message)
         }else {
             setMess(res.message)
+            navigate('/login')
         }
     }
 

@@ -5,6 +5,7 @@ import contactRoutes from './contacts/contact.routes.js';
 import memberShipRoute from './memberships/memberShip.routes.js';
 import property from './properties/properties.routes.js';
 import dashboard from './dashboard/dashboard.routes.js';
+import subscription from './subscription/subscription.routes.js';
 
 const router = express.Router();
 
@@ -19,6 +20,8 @@ router.use('/membership', memberShipRoute)
 router.use('/', property);
 
 router.use('/dashboard', dashboard);
+
+router.use('/subscription', subscription)
 
 export default router;
 

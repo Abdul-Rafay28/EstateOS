@@ -11,6 +11,9 @@ import GetMembers from "./pages/GetMembers"
 import GetContacts from "./pages/GetContacts"
 import AddTenants from "./pages/AddTenant"
 import Dashboard from "./pages/Dashboard"
+import ViewProperty from "./pages/ViewProperty"
+import SubscriptionPlan from "./pages/SubscriptionPlans"
+import CheckOut from "./pages/CheckOut"
 
 
 function Routers() {
@@ -32,7 +35,9 @@ function Routers() {
                     <Route path="members" element={<GetMembers />} />
                     <Route path="edit/member/:id" element={<AddMember />} />
                     <Route path="contacts" element={<GetContacts />} />
-
+                    <Route path="viewProperty/:id" element={<ViewProperty />} />
+                    <Route path="subscription/menu" element={<SubscriptionPlan />} />
+                    <Route path="checkOut/subscription" element={<CheckOut />} />
                 </Route>
 
             </Routes>

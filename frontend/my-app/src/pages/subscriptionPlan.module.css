@@ -1,0 +1,103 @@
+/* WRAPPER */
+.subscriptionWrapper {
+    min-height: 100vh;
+    text-align: center;
+    color: white;
+    padding: 60px 20px;
+}
+
+.subscriptionWrapper h1 {
+    margin-bottom: 10px;
+    font-size: 32px;
+}
+
+.subtitle {
+    color: #94a3ba;
+    margin-bottom: 30px;
+}
+
+.subscriptionContainer {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.subscriptionCard {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    width: 280px;
+    position: relative;
+    transition: 0.3s ease;
+}
+
+
+.subscriptionCard  h2 {
+    margin-bottom: 10px;
+    color: #e2e8f0;
+}
+.subscriptionCard  h3 {
+    margin-bottom: 10px;
+    color: #22d3ee;
+}
+
+.subscriptionCard  ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.subscriptionCard  ul li {
+    padding: 6px 0;
+     color: #cbd5f5; 
+     font-size: 16px;
+}
+
+.subscriptionCard button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    background: #22d3ee;
+    border: none;
+    cursor: pointer;
+    color: black;
+    transition: 0.3s ease;
+}
+
+.subscriptionCard button:hover {
+    background: #0ea5e9;
+    color: white;
+}
+
+.popularBadge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #22d3ee;
+    color: black;
+    padding: 5px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.subscriptionFooter {
+    margin-top: 40px;
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .subscriptionContainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .subscriptionCard {
+        width: 90%;
+        max-width: 350px;
+    }
+}

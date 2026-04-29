@@ -1,4 +1,4 @@
-import { addPropertyService, getPropertyService, getSinglePropertyService, propertyByIdService, updatePropertyStatusService, updateSinglePropertyService } from "./properties.service.js";
+import { addPropertyService, deletePropertyService, getPropertyService, getSinglePropertyService, propertyByIdService, updatePropertyStatusService, updateSinglePropertyService } from "./properties.service.js";
 
 export const addProperty = async (req, resp) => {
     try {
@@ -152,3 +152,25 @@ export const updateSingleProperty = async (req, resp) => {
         })
     }
 }
+
+export const deleteProperty = async (req, resp) => {
+    try {
+        const propertyId = req.params.id;
+        const tenantId = req.tenant._id;
+
+        const deleteRes = await deletePropertyService({ propertyId, tenantId });
+
+        resp.status(200).json({
+            message: 'Property deleted',
+            success: true,
+            data: deleteRes,
+        })
+
+    } catch (err) {
+        resp.status(err.statusCode || 500).json({
+            message: err.message || 'Internal server error',
+            success: false,
+        })
+    }
+}
+

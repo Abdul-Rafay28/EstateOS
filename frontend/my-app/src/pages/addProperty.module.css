@@ -11,8 +11,6 @@
 .addPropertyWrapper h1 {
     color: white;
     font-weight: bold;
-    position: relative;
-    bottom: 4rem;
     font-size: 28px;
 }
 
@@ -53,6 +51,7 @@
     border: 1px solid rgba(255, 255, 255, 0.08);
     padding: 20px;
     box-shadow: 40px 0 280px rgba(0, 0, 0, 0.1);
+    margin-bottom: 90px;
 }
 
 .error {
@@ -92,13 +91,13 @@
 .addPropertyContainer label {
     font-size: 20px;
     font-weight: 500;
-    margin-top: 10px;
+    margin-top: 5px;
     color: #a9baf8;
 }
 
 .addPropertyContainer input {
     width: 370px;
-    height: 30px;
+    height: 10px;
     font-size: 16px;
     border: 2px solid black;
     border-radius: 7px;
@@ -120,15 +119,22 @@
 
 .addPropertyContainer button {
     width: 200px;
-    height: 35px;
-    margin: 20px auto;
+    height: 40px;
+    margin: 20px auto 30px auto;
     font-size: 20px;
     font-weight: bold;
     border-radius: 10px;
     background-color: darkgray;
+    position: relative;
+    
 }
 
-.addPropertyContainer button:hover {
+.addPropertyContainer .searchItem {
+    color: white;
+    font-size: 22px;
+}
+
+.addPropertyContainer button:hover {    
     background-color: #8fa8ff;
 }
 

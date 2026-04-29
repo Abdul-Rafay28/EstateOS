@@ -155,7 +155,8 @@ function AddProperty() {
     const handleSearch = (e) => {
         const value = e.target.value;
         setSearch(value);
-
+        setErr('');
+        setMess('');
         const filtered = ownerFind.filter((contact) =>
             contact.fullName.toLowerCase().includes(value.toLowerCase())
         );
@@ -203,7 +204,7 @@ function AddProperty() {
                                 </select>
 
                                 <label>Description</label>
-                                <textarea onChange={handleChange} value={formData.description} name="description" placeholder="Write a short description (features, nearby places, etc.)" rows={4}></textarea>
+                                <textarea onChange={handleChange} value={formData.description} name="description" placeholder="Write a short description (features, nearby places, etc.)" rows={3}></textarea>
 
                                 <label>Owner</label>
                                 <input
@@ -221,7 +222,7 @@ function AddProperty() {
                                                 <div
                                                     key={contact._id}
                                                     className={styles.searchItem}
-                                                    onClick={() => selectOwner(contact)}
+                                                    onClick={() =>{ selectOwner(contact); setErr('')}}
                                                 >
                                                     {contact.fullName} - {contact.phone}
                                                 </div>

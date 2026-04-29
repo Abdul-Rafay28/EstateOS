@@ -1,0 +1,76 @@
+.ViewPropertyWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ViewPropertyWrapper h1 {
+    text-align: center;
+    font-size: 38px;
+    font-weight: bold;
+    color: white;
+}
+
+
+.ViewProperty {
+    width: 580PX;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    box-shadow: 20px 0 280px rgba(0, 0, 0, 0.5);
+    padding: 30px 80px;    
+}
+
+.ViewProperty h2 {
+    font-size: 28px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: bold;
+    color: #a0bfff;
+    text-align: center;
+    margin-top: 30px;
+    position: relative;
+    bottom: 20px;
+}
+
+.ViewProperty li {
+    color: white;
+    font-size: 18px;
+    margin-top: 20px;
+    text-transform: capitalize;
+}
+.ViewProperty span {
+    color: #a0bfff;
+    font-size: 20px;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.ViewPropertyContainer {
+    display: flex;
+    margin: 40px;
+    gap: 190px;
+}
+
+.ViewPropertyCard {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 30px 40px;
+    box-shadow: 20px 0 280px rgba(0, 0, 0, 0.5);
+}
+
+.ViewPropertyCard h2 {
+    color: #a0bfff;
+    text-align: center;
+    font-size: 22px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.ViewPropertyCard span {
+    color: #a0bfff;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.ViewPropertyCard li {
+    color: white;
+}

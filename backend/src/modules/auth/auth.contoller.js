@@ -75,3 +75,18 @@ export const loginUser = async (req, resp) => {
         })
     }
 }
+
+export const authMe = async (req, resp) => {
+    try {
+
+        resp.status(200).json({
+            success: true,
+            email: req.user.email,
+        })
+    } catch (err) {
+        resp.status(500).json({
+            message: 'Internal server error',
+            success: false,
+        })
+    }
+}

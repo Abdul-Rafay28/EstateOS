@@ -18,7 +18,7 @@ export const requireTenant = async (req, resp, next) => {
                 success: false,
             })
         }
-
+        
         if (tenant.status !== 'active') {
             return resp.status(403).json({
                 message: 'Workspace InActive',

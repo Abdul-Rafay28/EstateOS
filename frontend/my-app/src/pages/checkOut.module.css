@@ -1,0 +1,167 @@
+.checkOUtWrapper {
+    min-height: 100vh;
+    margin-left: 250px; /* 👈 sidebar ki width ke barabar */
+    padding: 60px 40px;
+    display: flex;
+    justify-content: center; /* center inside remaining space */
+    align-items: flex-start;
+    gap: 40px;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size:36px;
+}
+/* LEFT SIDE */
+.checkOutLeft {
+    flex: 1;
+    max-width: 600px;
+}
+
+.checkOutLeft h2 {
+    margin-bottom: 15px;
+    font-size: 22px;
+    color: white;
+}
+
+.checkOutLeft h3 {
+    color: white;
+    font-size: 22px;
+}
+
+/* PLAN BUTTONS */
+.checkOutSelect {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.checkOutSelect button {
+    flex: 1;
+    padding: 18px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.03);
+    color: white;
+    cursor: pointer;
+    text-align: left;
+    transition: 0.3s;
+}
+
+.checkOutSelect button:hover {
+    border-color: #6c63ff;
+    background: rgba(108,99,255,0.1);
+}
+
+.checkOutSelect span {
+    display: block;
+    font-size: 13px;
+    color: #aaa;
+    margin-top: 5px;
+}
+
+/* FORM */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+form label {
+    font-size: 14px;
+    color: #e2f3f0;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+form input {
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background: rgba(255,255,255,0.05);
+    color: white;
+}
+
+form input::placeholder {
+    color: #777;
+}
+
+/* DATE + CVV */
+.checkOUtDateCheck {
+    display: flex;
+    gap: 10px;
+}
+
+.checkOUtDateCheck input {
+    flex: 1;
+}
+
+/* BUTTON */
+form button {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 12px;
+    border: none;
+    background: #6c63ff;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+form button:hover {
+    background: #574fd6;
+}
+
+/* RIGHT SIDE */
+.checkOutRight {
+    width: 350px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 20px;
+    padding: 25px;
+    backdrop-filter: blur(10px);
+}
+
+.checkOutRight h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.checkOutRight h4 {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #ccc;
+}
+
+.checkOutRight span {
+    color: #888;
+}
+
+.error {
+    background: #5a1f1f;
+    color: red;
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+    width: 300px;
+    margin: 30px auto 0 auto;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.messege {
+    background: rgb(170, 233, 170);
+    color: rgba(3, 103, 16, 0.95);
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+    width: 300px;
+    margin: 30px auto 0 auto;
+    font-size: 20px;
+    font-weight: bold;
+}

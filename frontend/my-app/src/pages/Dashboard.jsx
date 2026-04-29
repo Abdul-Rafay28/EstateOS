@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useLocation, useNavigate, useParams } from "react-router";
 import styles from './dashboard.module.css';
 
 function Dashboard() {
@@ -9,6 +9,9 @@ function Dashboard() {
     const [data, setData] = useState({})
     const [err, setErr] = useState('')
     const navigate = useNavigate();
+
+    const location = useLocation();
+    const name = location.state?.name;
 
     const getDashboard = async () => {
         const url = "http://localhost:3200/api/v1/dashboard/state";
@@ -21,6 +24,8 @@ function Dashboard() {
         const res = await dashboardRes.json();
         if (res.success) {
             setData(res.stats)
+        } else {
+            setErr(res)
         }
     }
 
@@ -32,7 +37,7 @@ function Dashboard() {
         })
         const res = await authRes.json();
         if (!res.success) {
-            return setErr(res.message)
+            return setErr(res)
         }
     }
 
@@ -44,13 +49,19 @@ function Dashboard() {
 
     return (
         <>
-            <div className={styles.dashboardWrapper}>
 
-                {
-                    err ? <div className={styles.errorWrapper}>
-                        {err && <h3 className={styles.error}>🔒{err}</h3>}
-                        {err ? <button className={styles.goLoginBtn} onClick={() => navigate('/login')}>Go to login</button> : null}
+
+            {
+                err ?
+                    <div className={styles.errorWrapper}>
+                        {err.message && <h3 className={styles.error}>🔒{err.message}</h3>}
+                        {
+                            err.type === 'Subscription_Required' || err.type === 'Subscription_Expired' ?
+                                <button onClick={() => navigate(`/tenant/${tenantId}/subscription/menu`, { state: { name } })} className={styles.btn}>Upgrade Plan</button> :
+                                <button className={styles.btn}>Go to login</button>
+                        }
                     </div> :
+                    <div className={styles.dashboardWrapper}>
 
                         <div className={styles.dashboardContainer}>
 
@@ -76,16 +87,16 @@ function Dashboard() {
                             </div>
 
                         </div>
-                }
 
-                <div className={styles.dashboardProperty}>
-                    <h1>Properties</h1>
-                    <ul>
-                        <li><span>Available Properties : </span> {data.availableProperties}</li>
-                        <li><span>Sold Properties : </span> {data.soldProperties}</li>
-                    </ul>
-                </div>
-            </div>
+                        <div className={styles.dashboardProperty}>
+                            <h1>Properties</h1>
+                            <ul>
+                                <li><span>Available Properties : </span> {data.availableProperties}</li>
+                                <li><span>Sold Properties : </span> {data.soldProperties}</li>
+                            </ul>
+                        </div>
+                    </div>
+            }
 
 
         </>

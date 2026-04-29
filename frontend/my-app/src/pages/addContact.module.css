@@ -12,8 +12,8 @@
 .addContactWrapper h1 {
     font-weight: bold;
     position: static;
-    margin-bottom: 170px;
     color: white;
+    margin-top: -30px;
 
 }
 
@@ -111,12 +111,13 @@
 }
 
 .addContactContaier button {
-    width: 170px;
+    width: 270px;
     margin: 20px auto;
-    height: 30px;
+    height: 42px;
     border-radius: 10px;
     font-weight: bold;
     transition: all 0.2s ease;
+    font-size: 18px;
 }
 
 .addContactContaier button:hover {

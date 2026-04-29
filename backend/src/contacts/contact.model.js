@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
 
 const contactSchema = mongoose.Schema({
-    tenantId:{
+    tenantId: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'tenant',
     },
 
-    fullName:{
+    fullName: {
         type: String,
         required: true,
     },
@@ -21,10 +21,12 @@ const contactSchema = mongoose.Schema({
         type: String,
         unique: true,
     },
-    
+
 }, {
     timestamps: true,
 });
+
+contactSchema.index({ tenantId: 1, email: 1 }, { unique: true })
 
 const contactModel = mongoose.model('contact', contactSchema);
 

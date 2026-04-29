@@ -33,7 +33,7 @@
     border-radius: 10px;
 }
 
-.goLoginBtn {
+.btn {
     display: block;
     margin: 20px auto;
     background-color: darkcyan;
@@ -46,13 +46,12 @@
     transition: all 0.2s ease;
 }
 
-.goLoginBtn:hover {
+.btn:hover {
     background-color: #159a9a;
     transform: translateY(-2px);
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 
 }
-
 
 .memberCard {
     background: rgba(255, 255, 255, 0.05);
@@ -90,10 +89,16 @@
 }
 
 .memberCard .active {
+    position: relative;
+    top: 45px;
+    left: 10px;
     background-color: green;
 }
 
 .memberCard .disabled {
+    position: relative;
+    left: 10px;
+    top: 45px;
     background-color: red;
 }
 

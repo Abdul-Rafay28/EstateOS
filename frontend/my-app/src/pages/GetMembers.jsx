@@ -1,6 +1,6 @@
 import styles from './getMembers.module.css';
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 function GetMembers() {
 
@@ -8,6 +8,9 @@ function GetMembers() {
     const [data, setData] = useState([])
     const [err, setErr] = useState('');
     const navigate = useNavigate();
+
+    const location = useLocation();
+    const name = location.state?.name;
 
     useEffect(() => {
         getMembersData();
@@ -27,7 +30,7 @@ function GetMembers() {
         if (res.success) {
             setData(res.memberData)
         } else {
-            setErr(res.message)
+            setErr(res)
         }
     }
 
@@ -43,7 +46,7 @@ function GetMembers() {
         })
         const res = await updateRes.json();
         if (!res.success) {
-            alert(res.massage)
+            alert(res)
         } else {
             getMembersData();
         }
@@ -57,13 +60,13 @@ function GetMembers() {
         <>
             <div className={styles.getMembersWrapper}>
                 <h1>WorkSpace Members Data</h1>
-                {
-                    err ?
-                        <div className={styles.errorWrapper}>
-                            {err && <h3 className={styles.error}>🔒{err}</h3>}
-                            {err ? <button className={styles.goLoginBtn} onClick={() => navigate('/login')}>Go to login</button> : null}
-                        </div> : null
-                }
+                {err ?
+                    <div className={styles.errorWrapper}>
+                        {err.message && <h3 className={styles.error}>🔒{err.message}</h3>}
+                        {err.type === 'Subscription_Required' || err.type === 'Subscription_Expired' ?
+                            <button onClick={() => navigate(`/tenant/${tenantId}/subscription/menu`, { state: { name } })} className={styles.btn}>Upgrade Plan</button> :
+                            <button className={styles.btn} onClick={() => navigate('/login')}>Go to login</button>}
+                    </div> : null}
 
                 <div className={styles.getMembersContainer}>
                     {
